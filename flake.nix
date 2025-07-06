@@ -33,6 +33,7 @@
         modules = [
           lix-module.nixosModules.default
           disko.nixosModules.disko
+          ./disk-configs/single.nix
           ./configuration.nix
         ];
       };
@@ -44,6 +45,7 @@
         modules = [
           lix-module.nixosModules.default
           disko.nixosModules.disko
+          ./disk-configs/single.nix
           ./configuration.nix
           ./hardware-configuration.nix
         ];
@@ -56,6 +58,7 @@
         modules = [
           lix-module.nixosModules.default
           disko.nixosModules.disko
+          ./disk-configs/single.nix
           ./configuration.nix
           nixos-facter-modules.nixosModules.facter
           {
@@ -65,6 +68,20 @@
               else
                 throw "Have you forgotten to run nixos-anywhere with `--generate-hardware-config nixos-facter ./facter.json`?";
           }
+        ];
+      };
+
+      # metal hosts
+      nixosConfigurations.fmt2-core = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          lix-module.nixosModules.default
+          disko.nixosModules.disko
+          ./configuration.nix
+          ./hosts/fmt2-core.nix
+          ./disk-configs/zfs-mirror.nix
+          ./roles/dns/main.nix
+          ./roles/consul/fmt2.nix
         ];
       };
     };
