@@ -71,7 +71,7 @@
         ];
       };
 
-      # metal hosts
+      # core hosts
       nixosConfigurations.fmt2-core = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
@@ -85,4 +85,16 @@
         ];
       };
     };
+      nixosConfigurations.sea1-core = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          lix-module.nixosModules.default
+          disko.nixosModules.disko
+          ./configuration.nix
+          ./hosts/sea1-core.nix
+          ./disk-configs/zfs-mirror.nix
+          ./roles/dns/main.nix
+          ./roles/consul/sea1.nix
+        ];
+      };
 }
