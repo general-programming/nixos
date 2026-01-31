@@ -34,7 +34,7 @@
 
     interval = lib.mkOption {
       type = lib.types.int;
-      default = 10;
+      default = 600;
       description = "Interval in seconds to check for updates.";
     };
   };
