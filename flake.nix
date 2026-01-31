@@ -16,85 +16,82 @@
         url = "github:nix-community/disko";
         inputs.nixpkgs.follows = "nixpkgs";
       };
+
+      comin.url = "github:nlewo/comin";
+      comin.inputs.nixpkgs.follows = "nixpkgs";
+
+      lanzaboote.url = "github:rv32ima/lanzaboote";
+      lanzaboote.inputs.nixpkgs.follows = "nixpkgs";
+
+      nixos-hardware.url = "github:nixos/nixos-hardware";
       nixos-facter-modules.url = "github:numtide/nixos-facter-modules";
   };
 
   outputs =
     {
+      self,
       lix-module,
       nixpkgs,
       disko,
       nixos-facter-modules,
       ...
-    }:
+    }@inputs:
     {
-      nixosConfigurations.proxmox = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          lix-module.nixosModules.default
-          disko.nixosModules.disko
-          ./disk-configs/single.nix
-          ./configuration.nix
-        ];
+      nixosConfigurations = {
+        "proxmox" = self.lib.nixosSystem "proxmox";
+        "sea1-core" = self.lib.nixosSystem "sea1-core";
+        "fmt2-core" = self.lib.nixosSystem "fmt2-core";
       };
 
-      # Use this for all other targets
-      # nixos-anywhere --flake .#generic --generate-hardware-config nixos-generate-config ./hardware-configuration.nix <hostname>
-      nixosConfigurations.generic = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          lix-module.nixosModules.default
-          disko.nixosModules.disko
-          ./disk-configs/single.nix
-          ./configuration.nix
-          ./hardware-configuration.nix
-        ];
+      nixosModules = {
+        base = import ./machines/base.nix;
       };
 
-      # Slightly experimental: Like generic, but with nixos-facter (https://github.com/numtide/nixos-facter)
-      # nixos-anywhere --flake .#generic-nixos-facter --generate-hardware-config nixos-facter facter.json <hostname>
-      nixosConfigurations.generic-nixos-facter = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          lix-module.nixosModules.default
-          disko.nixosModules.disko
-          ./disk-configs/single.nix
-          ./configuration.nix
-          nixos-facter-modules.nixosModules.facter
-          {
-            config.facter.reportPath =
-              if builtins.pathExists ./facter.json then
-                ./facter.json
-              else
-                throw "Have you forgotten to run nixos-anywhere with `--generate-hardware-config nixos-facter ./facter.json`?";
-          }
-        ];
-      };
+      lib = {
+        vars = {
+          machines = import ./vars/machines.nix inputs;
+        };
 
-      # core hosts
-      nixosConfigurations.fmt2-core = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          lix-module.nixosModules.default
-          disko.nixosModules.disko
-          ./configuration.nix
-          ./hosts/fmt2-core.nix
-          ./disk-configs/zfs-mirror.nix
-          ./roles/dns/main.nix
-          ./roles/consul/fmt2.nix
-        ];
+        nixosSystem =
+          machineName: self.lib.nixosSystem' machineName ./machines/${machineName}/configuration.nix;
+
+        nixosSystem' =
+          machineName: machineModule:
+          nixpkgs.lib.nixosSystem {
+            modules = [
+              { networking.hostName = machineName; }
+              # inputs.sops-nix.nixosModules.default
+              self.nixosModules.base
+              machineModule
+              lix-module.nixosModules.default
+            ];
+            specialArgs = {
+              inherit self inputs;
+              vars = self.lib.vars;
+              vars' = self.lib.vars.machines.${machineName} or { };
+            };
+          };
+
+        nixosModule =
+          name:
+          if builtins.pathExists ./modules/${name}/default.nix then
+            import ./modules/${name}/default.nix
+          else if builtins.pathExists ./modules/${name}.nix then
+            import ./modules/${name}.nix
+          else
+            throw "NixOS module '${name}' not found in modules directory";
+
+        diskoConfiguration =
+          machineName:
+          import ./machines/${machineName}/disko.nix {
+            inherit (nixpkgs) lib;
+          };
+
+        sdImageFromSystem = system: system.config.system.build.sdImage;
+
+        # machineNixpkgsSystem fetches the architecture (pkgs.system) for a
+        # given machine.
+        machineNixpkgsSystem = machineName: self.nixosConfigurations.${machineName}.config.nixpkgs.system;
       };
-    };
-      nixosConfigurations.sea1-core = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          lix-module.nixosModules.default
-          disko.nixosModules.disko
-          ./configuration.nix
-          ./hosts/sea1-core.nix
-          ./disk-configs/zfs-mirror.nix
-          ./roles/dns/main.nix
-          ./roles/consul/sea1.nix
-        ];
-      };
+  };
 }
