@@ -49,4 +49,8 @@ in
 
   # Networking
   networking.useDHCP = true;
+
+  # Enable impermanence via /persist:
+  impermanence.enable = true;
+  fileSystems."/persist".neededForBoot = true;
 }
