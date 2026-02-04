@@ -40,8 +40,9 @@ in
     hostId = "30b7aad6";
   };
 
-  # Use the latest kernel for better hardware support
+  # Use the latest kernel for better hardware support, also pin zfs to unstable
   boot.kernelPackages = pkgs.linuxPackages_6_18;
+  zfs.package = pkgs.zfs_unstable;
 
   # Networking
   networking.useDHCP = true;
