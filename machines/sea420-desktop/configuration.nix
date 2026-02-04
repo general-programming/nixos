@@ -27,6 +27,7 @@ in
     # (self.lib.nixosModule "ssh")
     (self.lib.nixosModule "secureboot")
 
+    ./boot.nix
     ./disko.nix
   ];
 
