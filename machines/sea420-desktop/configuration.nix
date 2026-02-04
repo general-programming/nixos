@@ -25,6 +25,7 @@ in
     # (self.lib.nixosModule "network")
     # (self.lib.nixosModule "ssh")
     (self.lib.nixosModule "secureboot")
+    (self.lib.nixosModule "nvidia")
 
     ./hardware.nix
     ./boot.nix
