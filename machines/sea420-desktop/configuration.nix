@@ -55,4 +55,7 @@ in
   # Enable impermanence via /persist:
   impermanence.enable = true;
   fileSystems."/persist".neededForBoot = true;
+
+  # Enable podman
+  virtualisation.oci-containers.backend = "podman";
 }
