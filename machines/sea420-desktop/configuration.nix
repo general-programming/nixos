@@ -37,7 +37,7 @@ in
   networking = {
     hostName = "sea420-desktop";
     domain = "generalprogramming.org";
-    hostId = "30b7aad69";
+    hostId = "30b7aad6";
   };
 
   # Use the latest kernel for better hardware support
