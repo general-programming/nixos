@@ -57,5 +57,21 @@ in
   fileSystems."/persist".neededForBoot = true;
 
   # Enable podman
-  virtualisation.oci-containers.backend = "podman";
+  virtualisation = {
+    containers.enable = true;
+    podman = {
+      enable = true;
+      dockerCompat = true;
+      defaultNetwork.settings.dns_enabled = true; # Required for containers under podman-compose to be able to talk to each other.
+    };
+    oci-containers.backend = "podman";
+  };
+
+  # Packages
+  environment.systemPackages = with pkgs; [
+    # human interactions with podman
+    podman
+    # flexing
+    neofetch
+  ];
 }
