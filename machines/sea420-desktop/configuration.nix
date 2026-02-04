@@ -18,7 +18,6 @@ in
   imports = [
     disko.nixosModules.disko
 
-    (self.lib.nixosModule "disk/zfs-mirror")
     (self.lib.nixosModule "hardware/proxmox-vm")
     (self.lib.nixosModule "dns")
     (self.lib.nixosModule "gitops")
