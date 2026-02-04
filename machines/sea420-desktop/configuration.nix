@@ -39,6 +39,9 @@ in
     hostId = "30b7aad69";
   };
 
+  # Use the latest kernel for better hardware support
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
   # Networking
   networking.useDHCP = true;
   systemd.network.enable = true;
