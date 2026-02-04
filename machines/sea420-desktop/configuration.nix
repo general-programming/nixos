@@ -48,5 +48,4 @@ in
 
   # Networking
   networking.useDHCP = true;
-  systemd.network.enable = true;
 }
