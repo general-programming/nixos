@@ -7,4 +7,5 @@
   environment.systemPackages = with pkgs; [
     cudatoolkit
   ];
+  hardware.nvidia-container-toolkit.enable = true;
 }
