@@ -26,6 +26,8 @@ in
     # (self.lib.nixosModule "network")
     # (self.lib.nixosModule "ssh")
     (self.lib.nixosModule "secureboot")
+
+    ./disko.nix
   ];
 
   gitops = {
