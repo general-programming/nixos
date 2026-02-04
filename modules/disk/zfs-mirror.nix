@@ -69,4 +69,42 @@
       };
     };
   };
+
+  zpool.zroot = {
+    type = "zpool";
+    mode = "mirror";
+    options = {
+      ashift = "12";
+    };
+    rootFsOptions = {
+      acltype = "posixacl";
+      atime = "off";
+      compression = "zstd";
+      mountpoint = "none";
+      xattr = "sa";
+      "com.sun:auto-snapshot" = "false";
+    };
+    datasets = {
+      root = {
+        type = "zfs_fs";
+        mountpoint = "/";
+        options.mountpoint = "legacy";
+      };
+      home = {
+        type = "zfs_fs";
+        mountpoint = "/home";
+        options.mountpoint = "legacy";
+      };
+      persist = {
+        type = "zfs_fs";
+        mountpoint = "/persist";
+        options.mountpoint = "legacy";
+      };
+      nix = {
+        type = "zfs_fs";
+        mountpoint = "/nix";
+        options.mountpoint = "legacy";
+      };
+    };
+  };
 }
