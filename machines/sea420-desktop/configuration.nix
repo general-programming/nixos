@@ -41,7 +41,7 @@ in
   };
 
   # Use the latest kernel for better hardware support
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_6_18;
 
   # Networking
   networking.useDHCP = true;
