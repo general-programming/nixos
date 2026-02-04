@@ -38,7 +38,6 @@
 
     zpool.zroot = {
       type = "zpool";
-      mode = "mirror";
       options = {
         ashift = "12";
       };
