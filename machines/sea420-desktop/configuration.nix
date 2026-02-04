@@ -41,8 +41,10 @@ in
   };
 
   # Use the latest kernel for better hardware support, also pin zfs to unstable
-  boot.kernelPackages = pkgs.linuxPackages_6_18;
-  zfs.package = pkgs.zfs_unstable;
+  boot = {
+    kernelPackages = pkgs.linuxPackages_6_18;
+    zfs.package = pkgs.zfs_unstable;
+  };
 
   # Networking
   networking.useDHCP = true;
