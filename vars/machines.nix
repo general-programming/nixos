@@ -16,4 +16,7 @@ nixpkgs.lib.mapAttrs (_: nixpkgs.lib.attrsets.recursiveUpdate base) {
   fmt2-core = {
     machineID = "8b216aac9ac44002aacf262aacca1081";
   };
+  sea420-desktop = {
+    machineID = "30b7aad6952aeda770f149286983149d";
+  };
 }
