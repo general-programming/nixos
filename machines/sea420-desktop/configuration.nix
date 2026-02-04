@@ -18,7 +18,6 @@ in
   imports = [
     disko.nixosModules.disko
 
-    (self.lib.nixosModule "hardware/proxmox-vm")
     (self.lib.nixosModule "dns")
     (self.lib.nixosModule "gitops")
     (self.lib.nixosModule "glances-tty")
@@ -27,6 +26,7 @@ in
     # (self.lib.nixosModule "ssh")
     (self.lib.nixosModule "secureboot")
 
+    ./hardware.nix
     ./boot.nix
     ./disko.nix
   ];
