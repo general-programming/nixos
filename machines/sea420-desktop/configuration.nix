@@ -95,6 +95,10 @@ in
     vlc # Cross-platform media player and streaming server
     wayland-utils # Wayland utilities
     wl-clipboard # Command-line copy/paste utilities for Wayland
+    chromium
+    gamescope-wsi
+    steam-run
+    
   ];
 
   programs.firefox = {
@@ -123,4 +127,20 @@ in
     # If you want to use JACK applications, uncomment the following
     #jack.enable = true;
   };
+
+  # Gaming
+  programs.steam = {
+    enable = true; # Master switch, already covered in installation
+    remotePlay.openFirewall = true;  # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = true; # Open ports for Source Dedicated Server hosting
+    # Other general flags if available can be set here.
+  };
+
+  programs.gamescope = {
+    enable = true;
+    capSysNice = true;
+  };
+
+  # Tip: For improved gaming performance, you can also enable GameMode:
+  programs.gamemode.enable = true;
 }

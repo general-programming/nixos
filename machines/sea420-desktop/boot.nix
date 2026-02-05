@@ -4,16 +4,21 @@
   boot = {
     kernelParams = [
       "console=tty0"
+      "splash"
     ];
+
     kernelModules = [
       "kvm-intel"
     ];
+
     kernel.sysctl = {
       "vm.swappiness" = 80;
     };
+
     supportedFilesystems = [
       "btrfs"
     ];
+
     initrd = {
       availableKernelModules = [
         "nvme"
@@ -29,9 +34,12 @@
         enable = true;
       };
     };
+
     loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
+
+    plymouth.enable = true;
   };
 }
