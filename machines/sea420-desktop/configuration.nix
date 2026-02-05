@@ -151,6 +151,7 @@ in
       "wheel"
       "networkmanager"
       "audio"
+      "pipewire"
     ];
     hashedPasswordFile = "/persist/passwords/meow";
   };
