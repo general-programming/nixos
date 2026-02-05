@@ -150,6 +150,7 @@ in
     extraGroups = [
       "wheel"
       "networkmanager"
+      "audio"
     ];
     hashedPasswordFile = "/persist/passwords/meow";
   };
