@@ -151,6 +151,6 @@ in
       "wheel"
       "networkmanager"
     ];
-    passwordFile = "/persist/passwords/meow";
+    hashedPasswordFile = "/persist/passwords/meow";
   };
 }
