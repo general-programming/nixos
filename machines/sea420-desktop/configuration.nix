@@ -98,7 +98,7 @@ in
     chromium
     gamescope-wsi
     steam-run
-    
+
   ];
 
   programs.firefox = {
@@ -143,4 +143,14 @@ in
 
   # Tip: For improved gaming performance, you can also enable GameMode:
   programs.gamemode.enable = true;
+
+  # Users
+  users.users.meow = {
+    isNormalUser = true;
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+    ];
+    passwordFile = "/persist/passwords/meow";
+  };
 }
