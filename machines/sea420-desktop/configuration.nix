@@ -123,4 +123,7 @@ in
     # If you want to use JACK applications, uncomment the following
     #jack.enable = true;
   };
+
+  # Bluetooth
+  hardware.bluetooth.enable = true;
 }
