@@ -66,6 +66,12 @@ in
     oci-containers.backend = "podman";
   };
 
+  # punch holes for ports we might play with
+  networking.firewall.allowedTCPPorts = [
+      8000
+      8080
+  ];
+
   # Packages
   environment.systemPackages = with pkgs; [
     # human interactions with podman
@@ -73,4 +79,15 @@ in
     # flexing
     neofetch
   ];
+
+  # Desktop
+  services.desktopManager.plasma6.enable = true;
+
+  # Default display manager for Plasma
+  services.displayManager.sddm = {
+    enable = true;
+    
+    # To use Wayland (Experimental for SDDM)
+    wayland.enable = true;
+  };
 }
