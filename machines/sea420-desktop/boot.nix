@@ -4,7 +4,6 @@
   boot = {
     kernelParams = [
       "console=tty0"
-      "splash"
     ];
 
     kernelModules = [
@@ -39,7 +38,5 @@
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
-
-    plymouth.enable = true;
   };
 }

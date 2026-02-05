@@ -150,6 +150,7 @@ in
     extraGroups = [
       "wheel"
       "networkmanager"
+      "video"
       "audio"
       "pipewire"
     ];
