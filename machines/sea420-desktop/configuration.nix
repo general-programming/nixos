@@ -99,7 +99,7 @@ in
 
   programs.firefox = {
     enable = true;
-  }
+  };
 
   # Desktop
   services.desktopManager.plasma6.enable = true;
