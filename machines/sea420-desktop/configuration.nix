@@ -74,6 +74,8 @@ in
 
   # Packages
   environment.systemPackages = with pkgs; [
+    # other useful tools
+    gnumake
     # human interactions with podman
     podman
     # flexing
