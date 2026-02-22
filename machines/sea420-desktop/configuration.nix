@@ -166,7 +166,7 @@ in
   '';
 
   # Enable tailscale for this host only
-  program.tailscale = {
+  programs.tailscale = {
     enable = true;
     useRoutingFeatures = "server";
   };
