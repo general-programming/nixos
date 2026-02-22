@@ -164,4 +164,10 @@ in
     AllowHybridSleep=no
     AllowSuspendThenHibernate=no
   '';
+
+  # Enable tailscale for this host only
+  service.tailscale = {
+    enable = true;
+    useRoutingFeatures = "server";
+  };
 }

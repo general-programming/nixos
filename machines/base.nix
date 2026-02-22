@@ -94,9 +94,10 @@
     tmux
     # useful for getting metal host information
     dmidecode
-    # comma to make the whole nix run 'nixpkgs#whatever' process ez
-    comma
   ];
+
+  # nix-index with pre-built database (no local indexing needed)
+  programs.nix-index-database.comma.enable = true;
 
   environment.sessionVariables = {
     FLAKE = self;
