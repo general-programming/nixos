@@ -77,6 +77,7 @@ in
   environment.systemPackages = with pkgs; [
     # other useful tools
     gnumake
+    ubootTools
     # human interactions with podman
     podman
     # flexing
