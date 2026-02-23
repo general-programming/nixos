@@ -174,4 +174,7 @@ in
     enable = true;
     useRoutingFeatures = "server";
   };
+  
+  # Allow other arch emulation
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 }
