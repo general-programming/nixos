@@ -30,6 +30,7 @@ in
     ./hardware.nix
     ./boot.nix
     ./disko.nix
+    ./nfs.nix
   ];
 
   gitops = {
