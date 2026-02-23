@@ -31,6 +31,7 @@ in
     ./boot.nix
     ./disko.nix
     ./nfs.nix
+    ./tftp.nix
   ];
 
   gitops = {
