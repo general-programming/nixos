@@ -28,7 +28,7 @@
   nixpkgs.config = {
     allowUnfree = true;
     problems.handlers = {
-      zfs.broken = "warn"; # or "ignore"
+      zfs.broken = "ignore";
     };
   };
 
