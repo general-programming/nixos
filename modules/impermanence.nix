@@ -96,6 +96,7 @@
             name = "${builtins.toString path}";
             value = {
               device = "${toPersistPath path}";
+              fsType = "none";
               options = [ "bind" ];
             };
           }

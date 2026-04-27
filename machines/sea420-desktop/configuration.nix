@@ -47,7 +47,7 @@ in
 
   # Use the latest kernel for better hardware support, also pin zfs to unstable
   boot = {
-    kernelPackages = pkgs.linuxPackages_6_18;
+    kernelPackages = pkgs.linuxPackages_7_0;
     zfs.package = pkgs.zfs_unstable;
   };
 
@@ -163,12 +163,12 @@ in
   };
 
   # Disable auto sleep
-  systemd.sleep.extraConfig = ''
-    AllowSuspend=no
-    AllowHibernation=no
-    AllowHybridSleep=no
-    AllowSuspendThenHibernate=no
-  '';
+  systemd.sleep.settings.Sleep = {
+    AllowSuspend = "no";
+    AllowHibernation = "no";
+    AllowHybridSleep = "no";
+    AllowSuspendThenHibernate = "no";
+  };
 
   # Enable tailscale for this host only
   services.tailscale = {
