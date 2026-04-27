@@ -47,7 +47,7 @@ in
 
   # Use the latest kernel for better hardware support, also pin zfs to unstable
   boot = {
-    kernelPackages = pkgs.linuxPackages_7_0;
+    kernelPackages = pkgs.linuxPackages_6_19;
     zfs.package = pkgs.zfs_unstable;
   };
 
