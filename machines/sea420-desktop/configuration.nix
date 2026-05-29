@@ -83,6 +83,7 @@ in
     # useful dev tools
     direnv
     python315
+    tcpdump
     # human interactions with podman
     podman
     # flexing
