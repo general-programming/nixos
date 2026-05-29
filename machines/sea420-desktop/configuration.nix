@@ -185,4 +185,10 @@ in
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
   boot.binfmt.preferStaticEmulators = true;
   boot.binfmt.registrations."aarch64-linux".fixBinary = true;
+
+  # dev env
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+  };
 }
