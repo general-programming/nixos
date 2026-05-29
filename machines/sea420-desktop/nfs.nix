@@ -9,8 +9,8 @@
     services.nfs.server = {
         enable = true;
         exports = ''
-            /srv/nfs        *(ro,fsid=root,no_subtree_check)
-            /srv/nfs/consw  *(rw,no_root_squash,no_subtree_check)
+        /srv/nfs        10.36.75.0/24(ro,fsid=0,sec=sys,crossmnt,no_subtree_check)
+        /srv/nfs/consw  10.36.75.0/24(rw,sec=sys,no_root_squash,no_subtree_check,async)
         '';
         # Pin the NFSv3 helper daemon ports so they can be firewalled.
         lockdPort = 4001;
