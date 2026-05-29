@@ -11,6 +11,7 @@
     # served by the ro parent export, which is why writes fail with EROFS.
     fileSystems."/srv/nfs/consw" = {
         device = "/srv/nfs/consw";
+        fsType = "none";
         options = [ "bind" ];
     };
 
