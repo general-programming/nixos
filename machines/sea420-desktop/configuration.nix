@@ -80,6 +80,9 @@ in
     gnumake
     ubootTools
     screen
+    # useful dev tools
+    direnv
+    python315
     # human interactions with podman
     podman
     # flexing
