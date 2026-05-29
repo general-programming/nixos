@@ -79,6 +79,7 @@ in
     # other useful tools
     gnumake
     ubootTools
+    screen
     # human interactions with podman
     podman
     # flexing
