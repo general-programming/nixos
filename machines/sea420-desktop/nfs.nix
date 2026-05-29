@@ -6,6 +6,14 @@
         "d /srv/nfs/consw  0755 root root -"
     ];
 
+    # Make consw a real mountpoint so NFSv4 crossmnt transitions into the
+    # separate rw export. A subdirectory on the same filesystem is otherwise
+    # served by the ro parent export, which is why writes fail with EROFS.
+    fileSystems."/srv/nfs/consw" = {
+        device = "/srv/nfs/consw";
+        options = [ "bind" ];
+    };
+
     services.nfs.server = {
         enable = true;
         exports = ''
