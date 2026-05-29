@@ -183,4 +183,6 @@ in
   
   # Allow other arch emulation
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+  boot.binfmt.preferStaticEmulators = true;
+  boot.binfmt.registrations."aarch64-linux".fixBinary = true;
 }
