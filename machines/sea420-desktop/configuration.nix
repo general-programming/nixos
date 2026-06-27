@@ -24,7 +24,7 @@ in
     (self.lib.nixosModule "impermanence")
     # (self.lib.nixosModule "network")
     # (self.lib.nixosModule "ssh")
-    (self.lib.nixosModule "secureboot")
+    # (self.lib.nixosModule "secureboot")
     (self.lib.nixosModule "nvidia")
 
     ./hardware.nix
