@@ -4,6 +4,8 @@
   boot = {
     kernelParams = [
       "console=tty0"
+      "pcie_port_pm=off"
+      "pcie_aspm.policy=performance"
     ];
 
     kernelModules = [
